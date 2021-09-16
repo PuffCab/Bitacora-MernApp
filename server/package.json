@@ -15,13 +15,11 @@
   },
   "description": "A log book for your trips",
   "main": "server.js",
-  "devDependencies": {
-    "nodemon": "^2.0.12"
-  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "concurrently \"nodemon server.js\" \"cd ../client && npm start\""
   },
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/PuffCab/Bitacora-MernApp.git"

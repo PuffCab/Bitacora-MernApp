@@ -1,8 +1,10 @@
-const mongoose = require ('mongoose');
+// const mongoose = require ('mongoose');// import with nodejs syntax
+import mongoose from "mongoose";
 
-const { Schema } = mongoose
 
-const tripSchema = new Schema ({
+// const { Schema } = mongoose //commented as this was from LMS, together wit const tripSchema= new Schema()
+
+const tripSchema = new mongoose.Schema ({
     name: {
         type: String,
         required: true,
@@ -14,4 +16,6 @@ const tripSchema = new Schema ({
 
 const Trip = mongoose.model('Trip', tripSchema);
 
-module.exports = Trip
+
+module.exports = Trip //nodejs syntax
+
