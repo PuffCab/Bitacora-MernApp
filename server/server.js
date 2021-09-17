@@ -18,7 +18,7 @@ app.use(express.urlencoded({
 app.use(cors()); //TODO should we keep it? necessary?
 
 //using the routes for a specific api
-app.use('api/trips', tripRoutes)
+app.use('/api/trips', tripRoutes)
 
 //connect to mongodb / .env file 
 mongoose
