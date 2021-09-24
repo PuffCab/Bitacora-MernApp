@@ -6,7 +6,9 @@
     "scripts": {
         "front": "npm start -prefix client",
         "server": "npm server -prefix server"
-      }
-    
-    
-  }
+    },
+    "dependencies": {
+        "helmet": "^4.6.0",
+        "morgan": "^1.10.0"
+    }
+}

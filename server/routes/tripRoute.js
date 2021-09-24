@@ -17,7 +17,7 @@ router.get('/all',
  
 
 
-  
+   
 
   // router.get('/all', (req, res) => {
   //   tripsModel.find({}, function(err, trips) {

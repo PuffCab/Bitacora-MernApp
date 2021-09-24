@@ -1,13 +1,18 @@
+import helmet from "helmet";
+import morgan from "morgan";
+
 import dotenv from "dotenv";
 import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors'; //TODO should we keep it? necessary?
 // import bodyParser from 'body-parser'; // bodyparser is deprecated after express 4
 
-//importing the routes
+/////////importing the routes//////////////////
 import tripRoutes from "./routes/tripRoute.js"
-dotenv.config();
+import userRoute from "./routes/userRoute.js"
 
+dotenv.config();
+////////// END importing the routes /////////////
 const app = express(); //we instanciate express library through a constant , so we create an express aplication
 
 app.use(express.json());
@@ -17,8 +22,11 @@ app.use(express.urlencoded({
 
 app.use(cors()); //TODO should we keep it? necessary?
 
-//using the routes for a specific api
+///////////using the routes for a specific api //////////////
 app.use('/api/trips', tripRoutes)
+app.use('/api/users', userRoutes)
+
+/////////// END using the routes for a specific api //////////////
 
 //connect to mongodb / .env file 
 mongoose
@@ -37,3 +45,8 @@ app.listen(port, () => console.log(`Server started on port ${port}`));
 //   res.send({ msg: 'Test route.' });
 // });
 ///////just to try the server ... witl localhost:5000/test
+
+
+//some more middleware 
+app.use(helmet()); //to add security to HEAD requests
+app.use(morgan("common")); //check Morgan docs for other options such as "tiny" 
