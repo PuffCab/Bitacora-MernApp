@@ -9,7 +9,8 @@ import cors from 'cors'; //TODO should we keep it? necessary?
 
 /////////importing the routes//////////////////
 import tripRoutes from "./routes/tripRoute.js"
-import userRoute from "./routes/userRoute.js"
+import userRoutes from "./routes/userRoute.js"
+import authUserRoutes from "./routes/authUserRoute.js"
 
 dotenv.config();
 ////////// END importing the routes /////////////
@@ -25,6 +26,7 @@ app.use(cors()); //TODO should we keep it? necessary?
 ///////////using the routes for a specific api //////////////
 app.use('/api/trips', tripRoutes)
 app.use('/api/users', userRoutes)
+app.use('/api/auth', authUserRoutes)
 
 /////////// END using the routes for a specific api //////////////
 
