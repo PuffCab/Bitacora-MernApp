@@ -15,7 +15,7 @@ router.get('/all',
 ////// UPDATE USER
 router.put('/:id',
     async (req, res) => {
-      if(req.body.userId === req.params.id || req.user.isAdmin) {
+      if(req.body.userId === req.params.id || req.body.isAdmin) {
           if(req.body.password){ //if user tries to update password, regenerate password hash
             try {
                   const salt = await bcrypt.genSalt(10);
@@ -29,6 +29,7 @@ router.put('/:id',
               $set: req.body, //is gonna automatically set all inputs inside this body
             });
             res.status(200).json('User Account has been updated')
+            console.log(`account updated`)
           } catch(err) {
               return res.status(500).json(err)   
           }
@@ -37,13 +38,73 @@ router.put('/:id',
       } 
     })
 
-////// DELTE USER
+////// Delete USER
 
+router.delete('/:id',
+    async (req, res) => {
+      if(req.body.userId === req.params.id || req.body.isAdmin) {
+          
+          try {
+            const user = await userModel.findByIdAndDelete(req.params.id);
+            res.status(200).json('User Account has been deleted')
+            console.log('account deleted')
+          } catch(err) {
+              console.log("that went wrong") 
+              return res.status(500).json(err)
+                
+          }
+      } else {
+        console.log("that went wrong")
+        return res.status(403).json("this not your account to delete")
+      } 
+    })
 
 //// GET A USER
 
+router.get("/:id", 
+    async (req, res) => {
+      try {
+        const user = await userModel.findById(req.params.id);
+
+        const {nickName, favCity, ...rest} = user._doc // use of spread op. to take out properties we dont want to get
+
+        res.status(200).json(rest);
+        console.log(`your user is here`)
+
+      } catch(err){
+        console.log("that went wrong")
+        res.status(500).json(err)
+      }
+    })
 
 ///// FOLOW A USER
+
+router.put("/:id/follow", 
+  async (req, res) => {
+    if(req.body.userId !== req.params.id) {
+        try{
+            const user = await userModel.findById(req.params.id);
+            const currentUser = await userModel.findById(req.body.userId);
+
+              if(!user.followers.includes(req.body.userId)) { //if user ID is != to the user you want to follow (sended in params)
+                await user.updateOne({ $push: { followers: req.body.userId } });
+                await currentUser.updateOne({ $push: { youFollow: req.params.id } });
+                
+                res.status(200).json("following this user")
+
+              } else { //if the user = current user , means you are following him already.
+                  res.status(403).json("already following")
+              }
+
+        } catch(err) {
+            res.status(500).json(err)
+              
+        }
+
+    } else {
+      res.status(403).json("action invalid")
+    }
+  })
 
 
 ///// UNFOLOW A USER
