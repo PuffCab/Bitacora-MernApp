@@ -40,6 +40,14 @@ const userSchema = new mongoose.Schema ({
         isAdmin: {
             type: Boolean,
             default: false
+        },
+        description: {
+            type: String,
+            max: 40
+        },
+        favCity : {
+            type: String,
+            max: 30
         }
 
     },

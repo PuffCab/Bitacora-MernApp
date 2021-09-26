@@ -56,12 +56,13 @@ router.post('/register',
 
       } catch(err){
         console.log(err)
-      }
+        res.status(500).send(err.message);
+      } 
      
     });
 //////////////////////////////////////////
 
-//////////// LOGIN
+//////////// LOGIN  ///////////////////////
 router.post('/login',
     async (req, res) => {
 
@@ -75,13 +76,14 @@ router.post('/login',
            res.status(200).json(user); // if they are not invalid, response is ok and return the user
 
           } catch (err) {
+            res.status(500).send(err.message);
             console.log(err)
           }
       
      })
 
      
-
+     //////////// sames as before but USING IF statements to avoid [ERR_HTTP_HEADERS_SENT] Error //////////
     //  router.post("/login", async (req, res) => {
     //   try {
     //     const user = await userModel.findOne({ email: req.body.email });
@@ -100,7 +102,7 @@ router.post('/login',
     //     res.status(500).send(err.message);
     //   }
     // });
-
+//////////// END LOGIN  ///////////////////////////
 export default router
 
 
