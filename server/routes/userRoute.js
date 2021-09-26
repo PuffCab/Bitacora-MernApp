@@ -78,21 +78,20 @@ router.get("/:id",
     })
 
 ///// FOLOW A USER
-
 router.put("/:id/follow", 
   async (req, res) => {
     if(req.body.userId !== req.params.id) {
         try{
-            const user = await userModel.findById(req.params.id);
-            const currentUser = await userModel.findById(req.body.userId);
+            const user = await userModel.findById(req.params.id); //the user we want to follow
+            const currentUser = await userModel.findById(req.body.userId); //currentUser wants to follow User
 
-              if(!user.followers.includes(req.body.userId)) { //if user ID is != to the user you want to follow (sended in params)
+              if(!user.followers.includes(req.body.userId)) {
                 await user.updateOne({ $push: { followers: req.body.userId } });
                 await currentUser.updateOne({ $push: { youFollow: req.params.id } });
                 
                 res.status(200).json("following this user")
 
-              } else { //if the user = current user , means you are following him already.
+              } else { //if  user.followers includes current user , means currentUser is following him already.
                   res.status(403).json("already following")
               }
 
@@ -102,14 +101,40 @@ router.put("/:id/follow",
         }
 
     } else {
-      res.status(403).json("action invalid")
+      res.status(403).json("action invalid.Follow failed")
     }
   })
 
 
+
 ///// UNFOLOW A USER
 
+router.put("/:id/unfollow", 
+  async (req, res) => {
+    if(req.body.userId !== req.params.id) {
+        try{
+            const user = await userModel.findById(req.params.id); //the user we want to follow
+            const currentUser = await userModel.findById(req.body.userId); //currentUser wants to follow User
 
+              if(user.followers.includes(req.body.userId)) { //if user.followers includes body.userID, means we follow him
+                await user.updateOne({ $pull: { followers: req.body.userId } });
+                await currentUser.updateOne({ $pull: { youFollow: req.params.id } });
+                
+                res.status(200).json("User Unfollowed")
+
+              } else { //if  user.followers includes current user , means currentUser is following him already.
+                  res.status(403).json("cannot unfollow an user twice")
+              }
+
+        } catch(err) {
+            res.status(500).json(err)
+              
+        }
+
+    } else {
+      res.status(403).json("action invalid.Unfollow failed")
+    }
+  })
 
 
 
