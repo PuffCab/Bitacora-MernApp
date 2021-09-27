@@ -12,7 +12,7 @@ router.get('/all',
 
 
 
-////// UPDATE USER
+ //* ///////// UPDATE USER ///////
 router.put('/:id',
     async (req, res) => {
       if(req.body.userId === req.params.id || req.body.isAdmin) {
@@ -38,8 +38,7 @@ router.put('/:id',
       } 
     })
 
-////// Delete USER
-
+//* ///////// Delete USER ///////
 router.delete('/:id',
     async (req, res) => {
       if(req.body.userId === req.params.id || req.body.isAdmin) {
@@ -59,7 +58,7 @@ router.delete('/:id',
       } 
     })
 
-//// GET A USER
+//* /////////  GET A USER ///////
 
 router.get("/:id", 
     async (req, res) => {
@@ -77,7 +76,7 @@ router.get("/:id",
       }
     })
 
-///// FOLOW A USER
+//* ///////// FOLOW USER ///////
 router.put("/:id/follow", 
   async (req, res) => {
     if(req.body.userId !== req.params.id) {
@@ -107,8 +106,7 @@ router.put("/:id/follow",
 
 
 
-///// UNFOLOW A USER
-
+//* ///////// UNFOLOW A USER ///////
 router.put("/:id/unfollow", 
   async (req, res) => {
     if(req.body.userId !== req.params.id) {
@@ -130,12 +128,11 @@ router.put("/:id/unfollow",
             res.status(500).json(err)
               
         }
-
     } else {
       res.status(403).json("action invalid.Unfollow failed")
     }
   })
-
+ 
 
 
 export default router

@@ -83,7 +83,7 @@ router.post('/login',
      })
 
      
-     //////////// sames as before but USING IF statements to avoid [ERR_HTTP_HEADERS_SENT] Error //////////
+     ///////// sames as before but USING IF statements to avoid [ERR_HTTP_HEADERS_SENT] Error ////////
     //  router.post("/login", async (req, res) => {
     //   try {
     //     const user = await userModel.findOne({ email: req.body.email });
@@ -102,7 +102,7 @@ router.post('/login',
     //     res.status(500).send(err.message);
     //   }
     // });
-//////////// END LOGIN  ///////////////////////////
+////////// END LOGIN  ///////////////////////////
 export default router
 
 
