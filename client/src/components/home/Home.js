@@ -1,5 +1,5 @@
 import React from 'react'
-import Cities from './Cities'
+// import Cities from '../Cities'
 
 function Home() {
 
@@ -11,7 +11,7 @@ function Home() {
     return (
         <div>
             <h1>THIS IS MY HOME</h1>
-            <Cities/>
+            {/* <Cities/> */}
         </div>
     )
 }
