@@ -1,6 +1,7 @@
 import React from 'react';
 import "./navbar.css"
-import { Search, Person } from "@mui/icons-material"
+import { Chat, Person, Search, Notifications } from "@mui/icons-material"
+
 
 const Navbar = () => {
     return (
@@ -14,16 +15,31 @@ const Navbar = () => {
                     <input placeholder="Search...."type="text" className="searchInput" />
                 </div>
             <div className="navbarRight">
-                <span className="navbarLink">home</span>
-                <span className="navbarLink">feed</span>
-            </div>
-            <div className="navbarIcon">
-                <div className="navbarIconElement">
-                    <Person/>
-                    <span className="topbarIconCount">1</span>
+                <div className="navbarLinks"> 
+                    <span className="navbarLink">home</span>
+                    <span className="navbarLink">Feed</span>
                 </div>
+                <div className="navbarIcons">
+                    <div className="navabarIconElement">
+                        <Person/>
+                        <span className="navbarIconCount">0</span>
+                    </div>
+                </div>
+                <div className="navbarIcons">
+                    <div className="navabarIconElement">
+                        <Chat/>
+                        <span className="navbarIconCount">0</span>
+                    </div>
+                </div>
+                <div className="navbarIcons">
+                    <div className="navabarIconElement">
+                        <Notifications/>
+                        <span className="navbarIconCount">0</span>
+                    </div>
+                </div>
+                <img src={"https://lapsuspsych.files.wordpress.com/2015/02/homer.png"} alt="" className="navabarProfilePicture" />
             </div>
-        </div> 
+        </div>
     );
 };
 
