@@ -7,11 +7,13 @@ const Navbar = () => {
     return (
         <div className="navbarContainer">
             <div className="navbarLeft">
-                <div className="logo">mylogo</div>
+                <div className="logo">
+                    <h6>Bitacora</h6>
+                </div>
             </div>
             <div className="navbarCenter"></div>
                 <div className="searchBar">
-                    <Search/>
+                    <Search className="searchIcon"/>
                     <input placeholder="Search...."type="text" className="searchInput" />
                 </div>
             <div className="navbarRight">

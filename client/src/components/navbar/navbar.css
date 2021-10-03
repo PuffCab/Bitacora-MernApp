@@ -1,10 +1,10 @@
 .navbarContainer {
      height: 50px;
      width: 100%;
-     background-color: #1877f2 ;
+     background-color: #913009d2 ;
      display: flex;
      align-items: center;
-     position: static;
+     position: sticky;
      top: 0;
 } 
 .logo {
@@ -29,11 +29,59 @@
     align-items: center;
 
 }
+.searchIcon {
+    font-size: 20px !important;
+    margin-left: 10px;
+}
+.searchInput {
+    border: none;
+    width: 70%;
+}
+.searchInput:focus {
+    outline: none;
+}
+
 .navbarRight {
     flex: 4;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.navbarLink {
+    margin-right: 10px;
+    font-style: 14px;
+    cursor: pointer;  
+}
+
+.navbarIcons {
+    display: flex;
+}
+.navabarIconElement {
+    margin-right: 15px;
+    cursor: pointer;
+    position: relative;
+}
+
+.navbarIconCount {
+    width: 15px;
+    height: 15px;
+    background-color: black;
+    border-radius: 50%;
+    color: white;
+    /* position: absolute; */
+    /* top: -5px;
+    right: -5px; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+
 }
 
 .navabarProfilePicture {
     width: 32px;
     height: 32px;
+    background-repeat: 50px;
+    object-fit: cover;
+    cursor: pointer;
 }
