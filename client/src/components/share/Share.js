@@ -1,3 +1,4 @@
+import { PermMedia } from '@mui/icons-material';
 import React from 'react'
 import "./share.css";
 
@@ -5,10 +6,20 @@ function Share() {
     return (
         <div className="shareComponent">
             <div className="shareContainer">
-                <div className="topPart">
-                    <img className="shareProfilePic" src="https://lapsuspsych.files.wordpress.com/2015/02/homer.png" alt="" />
+                <div className="topSharePart">
+                    <img className="shareProfilePic" src="https://lapsuspsych.files.wordpress.com/2015/02/homer.png" alt="profilepic" />
+                    <input placeholder="your experience" className="ShareInput" id="" />
                 </div>
-                <div className="bottomPart"></div>
+                <hr />
+                <div className="bottomSharePart">
+                    <div className="shareOptions">
+                        <div className="shareOption">
+                            <PermMedia/>
+                            <span className="shareOptionText   ">Pic</span>
+                        </div>
+                    </div>
+                </div>
+
             </div>
             share component 
         </div> 

@@ -1,6 +1,7 @@
 import React from 'react'
-import Feed from '../feed/Feed'
-import Navbar from '../navbar/Navbar'
+
+import Navbar from "../../components/navbar/Navbar"
+import Feed from '../../components/feed/Feed';
 import './home.css'
 // import Cities from '../Cities'
 
@@ -15,7 +16,7 @@ function Home() {
             <h1>THIS IS MY HOME</h1>
             {/* <Cities/> */}
             <div className="homeContainer">
-                <Feed/>
+            <Feed/>   
             </div>
         </div>
     );

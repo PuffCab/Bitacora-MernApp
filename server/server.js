@@ -1,7 +1,6 @@
 import helmet from "helmet";
 import morgan from "morgan";
 
-import dotenv from "dotenv";
 import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors'; //TODO should we keep it? necessary?
@@ -13,6 +12,11 @@ import userRoutes from "./routes/userRoute.js";
 import authUserRoutes from "./routes/authUserRoute.js";
 import postRoutes from "./routes/postRoute.js";
 
+import passport from "passport";
+import { jwtStrategy } from './middlewares/passport.js';
+
+import * as dotenv from 'dotenv';
+// loading .env file
 dotenv.config();
 ////////// END importing the routes /////////////
 const app = express(); //we instanciate express library through a constant , so we create an express aplication
@@ -54,3 +58,7 @@ app.listen(port, () => console.log(`Server started on port ${port}`));
 //some more middleware 
 app.use(helmet()); //to add security to HEAD requests
 app.use(morgan("common")); //middleware to get requests in Terminal. check Morgan docs for other options such as "tiny" 
+
+//passport middleware
+passport.use('jwt', jwtStrategy);
+app.use(passport.initialize());

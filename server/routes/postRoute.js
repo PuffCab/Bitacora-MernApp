@@ -2,6 +2,8 @@ import express from 'express';
 const router = express.Router();
 import postModel from '../models/postModel.js';
 import userModel from '../models/userModel.js';
+import authenticate from '../middlewares/auth.js'
+import passport from "passport"
 
 
 // Testing Post Route ////////
@@ -70,7 +72,9 @@ router.delete("/:id",
 
 
 //* Get a post //////////
-router.get("/:id", 
+router.get("/:id",
+    // authenticate,
+    passport.authenticate("jwt", { session: false }),
     async (req, res) => {
         try {
             const post = await postModel.findById(req.params.id);
@@ -81,7 +85,9 @@ router.get("/:id",
     })
 
 //* Get all posts from single User //////////
-router.get("/allposts/all", 
+router.get("/allposts/all",
+    // authenticate,
+    passport.authenticate("jwt", { session: false }),
     async (req, res) => {
 
         // let allPostArray = [];
