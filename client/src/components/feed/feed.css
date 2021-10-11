@@ -1,4 +1,8 @@
 .feed {
     height: 100vh;
+    flex: 5.5
 }
 
+.feedContainer {
+    padding: 20px;
+}
