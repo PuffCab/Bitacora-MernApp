@@ -40,3 +40,30 @@
 hr {
     margin: 20px
  }
+
+ .bottomSharePart {
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+ }
+
+ .shareOptions {
+     display: flex;
+ }
+
+ .shareOption {
+     display: flex;
+     align-items: center;
+     margin-right: 15px;
+     cursor: pointer;
+ }
+
+ .shareIcon {
+     font-style: 18px;
+     margin-right: 3px;
+ }
+
+ .shareOptionText {
+     font-style: 14px;
+     font-weight: 500;
+ }

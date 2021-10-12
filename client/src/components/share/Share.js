@@ -14,7 +14,7 @@ function Share() {
                 <div className="bottomSharePart">
                     <div className="shareOptions">
                         <div className="shareOption">
-                            <PermMedia/>
+                            <PermMedia className="shareIcon"/>
                             <span className="shareOptionText   ">Pic</span>
                         </div>
                     </div>
