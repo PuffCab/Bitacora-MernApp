@@ -9,6 +9,10 @@ import './feed.css'
             <div className="feedContainer">
                  <Share/>
                  <Post/>
+                 <Post/>
+                 <Post/>
+                 <Post/>
+                 <Post/>
             </div>
 
         </div>
