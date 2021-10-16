@@ -7,7 +7,7 @@ function Share() {
         <div className="shareComponent">
             <div className="shareContainer">
                 <div className="topSharePart">
-                    <img className="shareProfilePic" src="https://lapsuspsych.files.wordpress.com/2015/02/homer.png" alt="profilepic" />
+                    <img className="shareProfilePic" src={require("../../images/user/homer.png").default} alt="profilepic" />
                     <input placeholder="your experience" className="ShareInput" id="" />
                 </div>
                 <hr />

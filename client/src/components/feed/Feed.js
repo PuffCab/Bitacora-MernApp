@@ -1,4 +1,5 @@
 import React from 'react'
+import { cities } from '../../dummyData'
 import Post from '../post/Post'
 import Share from '../share/Share'
 import './feed.css'
@@ -8,11 +9,10 @@ import './feed.css'
         <div className="feed">
             <div className="feedContainer">
                  <Share/>
-                 <Post/>
-                 <Post/>
-                 <Post/>
-                 <Post/>
-                 <Post/>
+                 {cities.map((p) => (
+                    <Post post={p} key={p.id}/>
+                 ))}
+                 
             </div>
 
         </div>
