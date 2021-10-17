@@ -143,42 +143,42 @@
 export const users = [
     {
       id:1,
-      profilePicture: "images/user/1.jpeg",
+      profilePicture: "user/1.jpeg",
       userName: "Marco Polo",
     },
     {
       id:2,
-      profilePicture: "images/user/2.jpeg",
+      profilePicture: "user/2.jpeg",
       userName: "Charles Darwin",
     },
     {
       id:3,
-      profilePicture: "images/user/3.jpeg",
+      profilePicture: "user/3.jpeg",
       userName: "Phileas Fogg",
     },
     {
       id:4,
-      profilePicture: "images/user/4.jpeg",
+      profilePicture: "user/4.jpeg",
       userName: "Dr Livingstone",
     },
     {
       id:5,
-      profilePicture: "images/user/5.jpeg",
+      profilePicture: "user/5.jpeg",
       userName: "Manfred von Richthofen",
     },
     {
       id:6,
-      profilePicture: "images/user/6.jpeg",
+      profilePicture: "user/6.jpeg",
       userName: "Jacques Cousteau",
     },
     {
       id:7,
-      profilePicture: "images/user/7.jpeg",
+      profilePicture: "user/7.jpeg",
       userName: "Cristobal Colon",
     },
     {
       id:8,
-      profilePicture: "images/user/8.jpeg",
+      profilePicture: "user/8.jpeg",
       userName: "Fernando de Magallanes",
     },
   ];
@@ -187,7 +187,7 @@ export const users = [
     {
       id: 1,
       desc: "Cathedral view from River",
-      photo: "images/city/1.jpeg",
+      photo: "city/1.jpeg",
       date: "5 mins ago",
       userId: 1,
       like: 32,
@@ -196,7 +196,7 @@ export const users = [
     {
       id: 2,
       desc: "New cathedral lateral entrance",
-      photo: "images/city/2.jpeg",
+      photo: "city/2.jpeg",
       date: "15 mins ago",
       userId: 2,
       like: 2,
@@ -205,7 +205,7 @@ export const users = [
     {
       id: 3,
       desc: "University's fachade",
-      photo: "images/city/3.jpeg",
+      photo: "city/3.jpeg",
       date: "1 hour ago",
       userId: 3,
       like: 61,
@@ -214,7 +214,7 @@ export const users = [
     {
       id: 4,
       desc: "Casa de las Conchas",
-      photo: "images/city/4.jpeg",
+      photo: "city/4.jpeg",
       date: "4 hours ago",
       userId: 4,
       like: 7,
@@ -223,7 +223,7 @@ export const users = [
     {
       id: 5,
       desc: "Main Square",
-      photo: "images/city/5.jpeg",
+      photo: "city/5.jpeg",
       date: "5 hours ago",
       userId: 5,
       like: 23,
@@ -231,7 +231,7 @@ export const users = [
     },
     {
       id: 6,
-      photo: "images/city/6.jpeg",
+      photo: "city/6.jpeg",
       date: "1 day ago",
       userId: 6,
       like: 44,
@@ -240,7 +240,7 @@ export const users = [
     {
       id: 7,
       desc: "Anaya Square",
-      photo: "images/city/7.jpeg",
+      photo: "city/7.jpeg",
       date: "2 days ago",
       userId: 7,
       like: 52,
@@ -249,7 +249,7 @@ export const users = [
     {
       id: 8,
       desc: "Santo Domingo's church",
-      photo: "images/city/8.jpeg",
+      photo: "city/8.jpeg",
       date: "3 days ago",
       userId: 8,
       like: 15,

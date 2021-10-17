@@ -5,6 +5,9 @@ import Feed from "../../components/feed/Feed";
 import ProfileInfo from "../../components/profilePage/ProfileInfo";
 
 function ProfilePage() {
+
+const testImgFolder = process.env.REACT_APP_PUBLIC_FOLDER  
+
   return (
     <div>
       <Navbar />
@@ -13,7 +16,7 @@ function ProfilePage() {
           <div className="profileRightTop">
             <div className="profileCover">
               {/* <img className="profileCoverImg" src="images/user/1.jpeg" alt="" /> */}
-              <img className="profileUserImg" src="images/user/3.jpeg" alt="" />
+              <img className="profileUserImg" src={testImgFolder+"/user/3.jpeg"} alt="" />
             </div>
             <div className="profileInfo">
                 <h4 className="profileInfoName">MARCO</h4>
