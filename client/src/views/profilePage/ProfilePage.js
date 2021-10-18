@@ -25,6 +25,7 @@ const testImgFolder = process.env.REACT_APP_PUBLIC_FOLDER
           </div>
           <div className="profileRightBottom">
             <ProfileInfo />
+            <Feed userName="Marco"/>
           </div>
         </div>
       </div>

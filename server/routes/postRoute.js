@@ -84,7 +84,7 @@ router.get("/:id",
         }
     })
 
-//* Get all posts from single User //////////
+//* Get all posts from single User for Profilepage //////////
 router.get("/allposts/:userId",
     // authenticate,
     passport.authenticate("jwt", { session: false }),
@@ -96,6 +96,28 @@ router.get("/allposts/:userId",
             const currentUser = await userModel.findById(req.params.userId);
             const allUserPosts = await postModel.find({ userId: currentUser._id});
             res.status(200).json([...allUserPosts])
+        } catch(err) {
+            res.status(500).json(err.message);
+        }
+    })
+
+//* Get all posts from ALL Users ////////// 
+router.get("/allUsersPosts/:userId",
+    // authenticate,
+    // passport.authenticate("jwt", { session: false }), REVIEW que hago con Token....es para cuando no estoy logged in?
+    async (req, res) => {
+
+        // let allPostArray = [];
+
+        try {
+            const currentUser = await userModel.findById(req.params.userId);
+            const allUserPosts = await postModel.find({ userId: currentUser._id});
+            const friendPosts = await Promise.all(
+                currentUser.youFollow.map((friendId) => {
+                    return postModel.find({ userId: friendId });
+                })
+            )
+            res.status(200).json(allUserPosts.concat(...friendPosts));
         } catch(err) {
             res.status(500).json(err.message);
         }

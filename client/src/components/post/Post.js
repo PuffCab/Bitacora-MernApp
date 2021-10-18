@@ -6,6 +6,7 @@ import "./post.css";
 import { useState, useEffect } from "react";
 import authAxios from '../../tools/axios';
 import TimeAgo from "react-timeago"
+import { Link } from 'react-router-dom';
 
 
 function Post({ post }) {
@@ -26,6 +27,7 @@ function Post({ post }) {
         const fetchUser = async () => {
             const res = await authAxios.get(`users/${post.userId}`)
             setUser(res.data)
+            console.log(res.data)
         }
         fetchUser()
         
@@ -35,7 +37,10 @@ function Post({ post }) {
             <div className="postContainer">
                 <div className="postTop">
                     <div className="postTopLeft">
-                        <img className="postUserProfileImage"  src={user.coverPicture || testImgFolder + "/user/avatar.jpeg" } alt="Salamanca" />
+                        <Link to={`profile/${user.userName}`}>
+                          <img className="postUserProfileImage"  src={user.coverPicture || testImgFolder + "/user/avatar.jpeg" } alt="Salamanca" />  
+                        </Link>
+                        
                         <span className="postUserName">{user.userName}</span>
                         <TimeAgo className="postDate" date={post.createdAt} />
                     </div> 

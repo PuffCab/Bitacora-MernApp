@@ -5,14 +5,17 @@ import Post from '../post/Post';
 import Share from '../share/Share';
 import './feed.css';
 import authAxios from "../../tools/axios.js";
+import axios from "axios"
 
- function Feed() {
+ function Feed({userName}) {
 
     const [posts, setPosts] = useState([])
 
     useEffect(() => {
         const fetchPosts = async () => {
-            const res = await authAxios.get("posts/allposts/614f8d88ed82bd79bf6d9fbf")
+            const res = userName 
+                ? await authAxios.get("posts/allposts/614f8d88ed82bd79bf6d9fbf") //WITH TOKEN
+                : await axios.get("posts/allUsersPosts/614f8d88ed82bd79bf6d9fbf"); //WITHOUT TOKEN
             setPosts(res.data)
         }
         fetchPosts()
@@ -47,3 +50,4 @@ import authAxios from "../../tools/axios.js";
 }
 
 export default Feed
+ 
