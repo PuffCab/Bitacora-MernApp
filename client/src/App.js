@@ -8,29 +8,63 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
+  Redirect
 } from "react-router-dom";
+import { AuthContext, AuthContextProvider } from './context/AuthContext';
+import { useContext } from 'react';
 
 
+
+// function App() {
+
+//   const {user} = useContext(AuthContext)
+//   console.log(`userINApp`, user)
+  
+//   return (
+//     <div className="app" >
+//       <AuthContextProvider>
+//         <Router>
+//           <Switch>
+//             <Route exact path="/">
+//                 { user ? <Home/> : <Login/> }
+//             </Route>
+//             <Route exact path="/login">
+//                 { user ? <Redirect to="/"/> : <Login/>}
+//             </Route>
+//             <Route exact path="/register">
+//                 {/* { user ? <Redirect to="/"/> : <Register/>} */}
+//             </Route>
+//             <Route exact path="/profilepage/:username">
+//                 <ProfilePage/>
+//             </Route>
+//           </Switch>
+//         </Router>
+//       </AuthContextProvider>
+//     </div>
+//   );
+// }
+
+// export default App;
 function App() {
+  const { user } = useContext(AuthContext);
   return (
-    <div className="app" >
-      <Router>
-         <Switch>
-           <Route exact path="/">
-              <Home/>
-           </Route>
-           <Route exact path="/login">
-              <Login/>
-           </Route>
-           <Route exact path="/register">
-              <Register/>
-           </Route>
-           <Route exact path="/profilepage/:username">
-              <ProfilePage/>
-           </Route>
-         </Switch>
-      </Router>
-    </div>
+    
+
+    <Router>
+      <Switch>
+        <Route exact path="/">
+          {user ? <Home /> : <Register />}
+        </Route>
+        <Route path="/login">{user ? <Redirect to="/" /> : <Login />}</Route>
+        <Route path="/register">
+          {user ? <Redirect to="/" /> : <Register />}
+        </Route>
+        <Route path="/profile/:username">
+          <ProfilePage />
+        </Route>
+      </Switch>
+    </Router>
+    
   );
 }
 

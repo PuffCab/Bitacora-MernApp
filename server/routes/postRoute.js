@@ -84,7 +84,7 @@ router.get("/:id",
         }
     })
 
-//* Get all posts from single User for Profilepage //////////
+//* Get all posts from single User for Profilepage WITH ID //////////
 router.get("/allposts/:userId",
     // authenticate,
     passport.authenticate("jwt", { session: false }),
@@ -100,7 +100,24 @@ router.get("/allposts/:userId",
             res.status(500).json(err.message);
         }
     })
+//* Get all posts from single User for Profilepage WITH USERNAME //////////
+router.get("/profilepage/:userName",
+    // authenticate,
+    passport.authenticate("jwt", { session: false }),
+    async (req, res) => {
 
+        // let allPostArray = [];
+
+        try {
+            const currentUser = await userModel.findOne({userName: req.params.userName});
+            const allUserPosts = await postModel.find({ userId: currentUser._id});
+            res.status(200).json([...allUserPosts])
+        } catch(err) {
+            res.status(500).json(err.message);
+        }
+    })
+
+    
 //* Get all posts from ALL Users ////////// 
 router.get("/allUsersPosts/:userId",
     // authenticate,

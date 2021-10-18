@@ -14,7 +14,7 @@ import axios from "axios"
     useEffect(() => {
         const fetchPosts = async () => {
             const res = userName 
-                ? await authAxios.get("posts/allposts/614f8d88ed82bd79bf6d9fbf") //WITH TOKEN
+                ? await authAxios.get("posts/profilepage/" + userName ) //WITH TOKEN
                 : await axios.get("posts/allUsersPosts/614f8d88ed82bd79bf6d9fbf"); //WITHOUT TOKEN
             setPosts(res.data)
         }

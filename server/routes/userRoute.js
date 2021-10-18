@@ -60,11 +60,14 @@ router.delete('/:id',
 
 //* /////////  GET A USER ///////
 
-router.get("/:id", 
+router.get("/", 
     async (req, res) => {
+      const userId = req.query.userId;
+      const userName = req.query.userName;
       try {
-        const user = await userModel.findById(req.params.id);
-
+        const user = userId
+          ? await userModel.findById(userId)
+          : await userModel.findOne({ userName: userName}); // REVIEW we introduce condition in case we dont have ID and just userNanme
         const {nickName, favCity, ...rest} = user._doc // use of spread op. to take out properties we dont want to get
 
         res.status(200).json(rest);
