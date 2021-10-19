@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import "./navbar.css"
 import { Chat, Person, Search, Notifications } from "@mui/icons-material"
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../context/AuthContext';
 
 
 const Navbar = () => {
     const testImgFolder = process.env.REACT_APP_PUBLIC_FOLDER
+
+    const { user } = useContext(AuthContext)
+
     return (
         <div className="navbarContainer">
             <div className="navbarLeft">

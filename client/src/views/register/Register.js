@@ -1,21 +1,64 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import "./register.css"
+import axios from "axios"
+import { useHistory } from 'react-router';
 
 function Register() {
+    
+    const history = useHistory()
+    const email = useRef();
+    const password= useRef();
+    const userName= useRef();
+    
+    const handleClick = async (e) => {
+        e.preventDefault()
+        const user = {
+            userName: userName.current.value,
+            email: email.current.value,
+            password: password.current.value
+        }
+        try {
+            await axios.post("/auth/register", user)
+            history.push("/login")
+            console.log("user Registered", user)
+        } catch(err) {
+            console.log(`err>>>`, err)
+        }
+    };
+
     return (
         <div className="login">
             <div className="loginWrapper">
                 <div className="loginLeft">
                     <h3 className="loginLogo">Bitacora</h3>
-                    <span className="loginText">Login to see some nice places</span>
+                    <span className="loginText">Create an Account</span>
                 </div>
                 <div className="loginRight">
-                    <div className="loginArea">
-                        <input placeholder="email" className="loginInput" />
-                        <input placeholder="password" className="loginInput" />
-                        <button className="loginButton">Sign up</button>
+                    <form className="loginArea" onSubmit={handleClick}>
+                        <input 
+                            className="loginInput" 
+                            placeholder="User Name"
+                            ref={userName}
+                            required
+                        />
+                        <input 
+                            className="loginInput" 
+                            placeholder="email"
+                            type="email"
+                            ref={email}
+                            required
+                        />
+                        <input 
+                            className="loginInput" 
+                            placeholder="password"
+                            type="password"
+                            ref={password}
+                            required
+                            minLength="6"                               
+                            />
+                        <button className="loginButton" type="submit">Sign up</button>
                         <button className="loginRegisterButton">Login into your Account</button>
-                    </div>
+                    </form>
                 </div>
             </div>
             
