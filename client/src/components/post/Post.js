@@ -3,10 +3,12 @@ import React from 'react';
 import "./post.css";
 
 //    
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import authAxios from '../../tools/axios';
+import axios from "axios";
 import TimeAgo from "react-timeago"
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../context/AuthContext';
 
 
 function Post({ post }) {
@@ -16,29 +18,49 @@ function Post({ post }) {
 
     const [like, setLike] = useState(post.likes.length) 
     const [isLiked, setIsLiked] = useState(false)
+    const [user, setUser] = useState({})
+    const testImgFolder = process.env.REACT_APP_PUBLIC_FOLDER
+    const { user:currentUser } = useContext(AuthContext)
+    
+    //////////////////////
+    //Handle Likes
+    //////////////////////
     const likeHandler = () => {
+        try {
+            axios.put("/posts/"+ post._id +"/like", {userId: currentUser._id.$oid})
+        } catch(err) {
+
+        }
         setLike(isLiked ? like-1 : like+1)
         setIsLiked(!isLiked)
     }
-    const [user, setUser] = useState({})
-    const testImgFolder = process.env.REACT_APP_PUBLIC_FOLDER
+    //check if  currentuser has liked the post before
+    useEffect(() => {
+        setIsLiked(post.likes.includes(currentUser._id.$oid))
+    }, [post.likes, currentUser._id])
+     //////////////////////
+    //FIN Handle Likes
+    //////////////////////
+
 
     useEffect(() => {
         const fetchUser = async () => {
-            const res = await authAxios.get(`users?userId=${post.userId}`)
+            const res = await axios.get(`/users?userId=${post.userId}`)
             setUser(res.data)
             console.log(res.data)
         }
         fetchUser()
-        
     }, [post.userId])
+
+
+    console.log(`user.userName>>>`, user.userName)
     return (
         <div className="post">
             <div className="postContainer">
                 <div className="postTop">
                     <div className="postTopLeft">
                         <Link to={`profile/${user.userName}`}>
-                          <img className="postUserProfileImage"  src={user.coverPicture || testImgFolder + "/user/avatar.jpeg" } alt="Salamanca" />  
+                          <img className="postUserProfileImage"  src={user.coverPicture ? user.coverPicture : testImgFolder + "/user/avatar.jpeg" } alt="Salamanca" />  
                         </Link>
                         
                         <span className="postUserName">{user.userName}</span>

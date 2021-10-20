@@ -9,6 +9,7 @@ const Navbar = () => {
     const testImgFolder = process.env.REACT_APP_PUBLIC_FOLDER
 
     const { user } = useContext(AuthContext)
+    console.log(`userName>>>`, user.userName)
 
     return (
         <div className="navbarContainer">
@@ -46,8 +47,10 @@ const Navbar = () => {
                         <Notifications/>
                         <span className="navbarIconCount">0</span>
                     </div>
-                </div>
-                <img src={testImgFolder + "/user/homer.png"} alt="" className="navabarProfilePicture" />
+                </div> 
+                <Link to={`/profile/${user.userName}`}>
+                    <img src={user.coverPicture || testImgFolder + "/user/avatar.jpeg" } alt="" className="navabarProfilePicture" />
+                </Link>
             </div>
         </div>
     );
