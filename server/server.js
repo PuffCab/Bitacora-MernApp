@@ -1,6 +1,10 @@
 import helmet from "helmet";
 import morgan from "morgan";
 
+import multer from "multer";
+import { dirname } from "path"
+
+
 import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors'; //TODO should we keep it? necessary?
@@ -36,6 +40,11 @@ app.use('/api/posts', postRoutes);
 
 /////////// END using the routes for a specific api //////////////
 
+///////////////////
+//MULTER ROUTE
+///////////////////
+
+
 //connect to mongodb / .env file 
 mongoose
   .connect(process.env.DB)
@@ -62,3 +71,25 @@ app.use(morgan("common")); //middleware to get requests in Terminal. check Morga
 //passport middleware
 passport.use('jwt', jwtStrategy);
 app.use(passport.initialize());
+
+//Multer Middleware
+app.use("/images", express.static("public/images"))
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "public/images");
+  },
+  filename: function (req, file, cb) {
+    cb(null, req.body.name)  // ASK why doesnt work with req.body.name?
+  } 
+});
+
+const upload = multer({storage: storage});
+app.post("/api/upload", upload.single("file"), (rq,res) => {
+  try {
+    return res.status(200).json("File uploaded succesfully")
+  } catch (err) {
+    console.log(err.message)
+  }
+
+})

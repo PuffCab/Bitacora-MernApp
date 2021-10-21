@@ -73,6 +73,7 @@ function Post({ post }) {
                 <div className="postCenter">
                     <span className="postText">{post?.description }</span>
                     <img className="postImage" src={ testImgFolder+post.img } alt="" />
+                    {console.log("imagen>>>", testImgFolder)}
                 </div>
                 <div className="postBottom">
                     <div className="postBottomLeft">
