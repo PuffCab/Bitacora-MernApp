@@ -1,44 +1,25 @@
-/* .profileTitle {
+.friendsTitle {
     font-style: 18px;
     font-weight: 100;
     margin-bottom: 10px;
-} */
-
-.profileInfo {
-    margin-bottom: 30px;
-
 }
 
-.profileInfoItem {
-    margin-bottom: 10px;
-}
-
-.profileInfoField {
-    font-weight: 500;
-    margin-right: 15px;
-    color: #555;
-}
-
-.profileInfoValue {
-    font-weight: 300;
-}
-
-/* .profileFollowings {
+.friendsFollowings {
     display: flex;
     flex-wrap: wrap;
     justify-content:space-between;
 }
 
-.profileFollowing {
+.friendsFollowing {
     display: flex;
     flex-direction: column;
     margin-bottom: 20px;
     cursor: pointer;
 }
 
-.profileFollowingImg {
+.friendsFollowingImg {
     width: 100px;
     height: 100px;
     object-fit: cover;
     border-radius: 5px;
-} */
+}

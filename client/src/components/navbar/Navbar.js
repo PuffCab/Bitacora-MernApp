@@ -49,7 +49,7 @@ const Navbar = () => {
                     </div>
                 </div> 
                 <Link to={`/profile/${user.userName}`}>
-                    <img src={user.coverPicture || testImgFolder + "/user/avatar.jpeg" } alt="" className="navabarProfilePicture" />
+                    <img src={user.coverPicture ? testImgFolder+user.coverPicture : testImgFolder + "/user/avatar.jpeg" } alt="" className="navabarProfilePicture" />
                 </Link>
             </div>
         </div>

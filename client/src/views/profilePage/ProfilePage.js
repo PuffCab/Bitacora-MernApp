@@ -5,6 +5,7 @@ import Feed from "../../components/feed/Feed";
 import ProfileInfo from "../../components/profilePage/ProfileInfo";
 import authAxios from "../../tools/axios";
 import { useParams } from "react-router-dom"
+import Friends from "../../components/friends/Friends";
 
 
 function ProfilePage() {
@@ -33,7 +34,7 @@ useEffect(() => {
           <div className="profileRightTop">
             <div className="profileCover">
               {/* <img className="profileCoverImg" src="images/user/1.jpeg" alt="" /> */}
-              <img className="profileUserImg" src={user.coverPicture || testImgFolder + "/user/avatar.jpeg"} alt="" />
+              <img className="profileUserImg" src={user.coverPicture ? testImgFolder+user.coverPicture : testImgFolder + "/user/avatar.jpeg"} alt="" />
             </div>
             <div className="profileInfo">  
                 <h4 className="profileInfoName">{user.userName}</h4>
@@ -42,6 +43,7 @@ useEffect(() => {
           </div>
           <div className="profileRightBottom">
             <ProfileInfo user={user} />
+            <Friends user={user}/>
             <Feed userName={userName}/>
           </div>
         </div>

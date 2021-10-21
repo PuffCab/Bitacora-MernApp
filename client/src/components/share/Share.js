@@ -10,6 +10,7 @@ function Share() {
     const testImgFolder = process.env.REACT_APP_PUBLIC_FOLDER
     
     const { user } = useContext(AuthContext)
+    console.log(`user`, user)
     
     
     /////////////////////
@@ -38,6 +39,7 @@ function Share() {
         }
         try {
             await axios.post("/posts", newPost)
+            window.location.reload() // REVIEW cheap trick to refresh after uploading. Later create a post context and update post state
             console.log(`newPost`, newPost)
         } catch(err){
             console.log("error", err.message)
@@ -48,6 +50,7 @@ function Share() {
             <div className="shareContainer">
                 <div className="topSharePart">
                     <img className="shareProfilePic" src={user.coverPicture ? user.coverPicture : testImgFolder + "/user/avatar.jpeg"} alt="profilepic" />
+                    {console.log("COVER PICTURE!!!", user.coverPicture)}
                     <input 
                         className="ShareInput" 
                         placeholder="your experience" 

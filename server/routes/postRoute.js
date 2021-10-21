@@ -129,8 +129,8 @@ router.get("/allUsersPosts/:userId",
         try {
             const currentUser = await userModel.findById(req.params.userId);
             const allUserPosts = await postModel.find({ userId: currentUser._id});
-            const friendPosts = await Promise.all(
-                currentUser.youFollow.map((friendId) => {
+            const friendPosts = await Promise.all( //NOTE we use promise to map over friends Array
+                currentUser.friends.map((friendId) => {
                     return postModel.find({ userId: friendId });
                 })
             )

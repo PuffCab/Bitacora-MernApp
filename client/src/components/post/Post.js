@@ -15,7 +15,7 @@ function Post({ post }) {
 
     // const user = users.filter(u => u.id === 1)
     // console.log(user[0].userName)
-
+    
     const [like, setLike] = useState(post.likes.length) 
     const [isLiked, setIsLiked] = useState(false)
     const [user, setUser] = useState({})
@@ -24,7 +24,7 @@ function Post({ post }) {
     
     //////////////////////
     //Handle Likes
-    //////////////////////
+    ////////////////////// 
     const likeHandler = () => {
         try {
             axios.put("/posts/"+ post._id +"/like", {userId: currentUser._id.$oid})
@@ -47,20 +47,21 @@ function Post({ post }) {
         const fetchUser = async () => {
             const res = await axios.get(`/users?userId=${post.userId}`)
             setUser(res.data)
-            console.log(res.data)
+            // console.log(res.data)
         }
         fetchUser()
     }, [post.userId])
 
 
-    console.log(`user.userName>>>`, user.userName)
+    // console.log(`user.userName>>>`, user.userName)
     return (
         <div className="post">
             <div className="postContainer">
                 <div className="postTop">
                     <div className="postTopLeft">
                         <Link to={`profile/${user.userName}`}>
-                          <img className="postUserProfileImage"  src={user.coverPicture ? user.coverPicture : testImgFolder + "/user/avatar.jpeg" } alt="Salamanca" />  
+                          <img className="postUserProfileImage"  src={user.coverPicture ? testImgFolder+user.coverPicture : testImgFolder + "/user/avatar.jpeg" } alt="Salamanca" />  
+                          
                         </Link>
                         
                         <span className="postUserName">{user.userName}</span>
@@ -73,7 +74,6 @@ function Post({ post }) {
                 <div className="postCenter">
                     <span className="postText">{post?.description }</span>
                     <img className="postImage" src={ testImgFolder+post.img } alt="" />
-                    {console.log("imagen>>>", testImgFolder)}
                 </div>
                 <div className="postBottom">
                     <div className="postBottomLeft">

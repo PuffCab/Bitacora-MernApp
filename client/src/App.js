@@ -10,7 +10,7 @@ import {
   Route,
   Redirect
 } from "react-router-dom";
-import { AuthContext, AuthContextProvider } from './context/AuthContext';
+import { AuthContext } from './context/AuthContext';
 import { useContext } from 'react';
 
 

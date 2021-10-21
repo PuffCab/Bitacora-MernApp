@@ -12,7 +12,12 @@ const INITIAL_STATE = {
         avatar:"",
         coverPicture:"",
         followers:[],
-        youFollow:[],
+        friends:[
+            "614f8d88ed82bd79bf6d9fbf",
+            "614f2c16f311c9925326e009",
+            "614f28b8bc0d409c98834702",
+            "616d7f0501f1ec8ca598b5ee"
+        ],
         isAdmin:false,
         createdAt:{"$date":{"$numberLong":"1634680359197"}},
         updatedAt:{"$date":{"$numberLong":"1634680359197"}},

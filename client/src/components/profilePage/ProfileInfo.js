@@ -23,25 +23,7 @@ function ProfileInfo({ user }) {
                     <span className="profileInfoValue">{user.email}</span>
                 </div>
             </div>
-            <h4 className="profileTitle">User Friends</h4>
-            <div className="profileFollowings">
-                <div className="profileFollowing">
-                    <img src={testImgFolder+"/user/4.jpeg"} alt="" className="profileFollowingImg" />
-                    <span className="profileFollowingName">Alguien Perez </span>
-                </div>
-                <div className="profileFollowing">
-                    <img src={testImgFolder+"/user/5.jpeg"} alt="" className="profileFollowingImg" />
-                    <span className="profileFollowingName">Alguien Lopez </span>
-                </div>
-                <div className="profileFollowing">
-                    <img src={testImgFolder+"/user/6.jpeg"} alt="" className="profileFollowingImg" />
-                    <span className="profileFollowingName">Alguien Gutierrez </span>
-                </div>
-                <div className="profileFollowing">
-                    <img src={testImgFolder+"/user/7.jpeg"} alt="" className="profileFollowingImg" />
-                    <span className="profileFollowingName">Alguien Sanchez </span>
-                </div>
-            </div>
+            
             
         </>
     )

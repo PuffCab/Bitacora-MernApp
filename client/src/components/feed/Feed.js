@@ -19,10 +19,17 @@ import { AuthContext } from '../../context/AuthContext';
         const fetchPosts = async () => {
             console.log(`user._id>>>`, user._id)
             const res = userName 
+            
                 ? await axios.get("posts/profilepage/" + userName ) //WITH TOKEN hardcoded
                 : await axios.get("posts/allUsersPosts/" + user._id.$oid); //WITHOUT TOKEN
-            setPosts(res.data)
+            
+            const orderedPosts = res.data.sort((a,b) => {
+                return new Date(b.createdAt) - new Date(a.createdAt);
+            })
+                setPosts(orderedPosts)
+            console.log(`res.data>>>`, res.data)
         }
+        
         fetchPosts()
         
     }, [userName, user._id])

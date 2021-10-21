@@ -89,7 +89,7 @@ router.put("/:id/follow",
 
               if(!user.followers.includes(req.body.userId)) {
                 await user.updateOne({ $push: { followers: req.body.userId } });
-                await currentUser.updateOne({ $push: { youFollow: req.params.id } });
+                await currentUser.updateOne({ $push: { friends: req.params.id } });
                 
                 res.status(200).json("following this user")
 
@@ -110,6 +110,7 @@ router.put("/:id/follow",
 
 
 //* ///////// UNFOLOW A USER ///////
+
 router.put("/:id/unfollow", 
   async (req, res) => {
     if(req.body.userId !== req.params.id) {
@@ -119,7 +120,7 @@ router.put("/:id/unfollow",
 
               if(user.followers.includes(req.body.userId)) { //if user.followers includes body.userID, means we follow him
                 await user.updateOne({ $pull: { followers: req.body.userId } });
-                await currentUser.updateOne({ $pull: { youFollow: req.params.id } });
+                await currentUser.updateOne({ $pull: { friends: req.params.id } });
                 
                 res.status(200).json("User Unfollowed")
 
@@ -136,6 +137,31 @@ router.put("/:id/unfollow",
     }
   })
  
+//* ///////// GET FRIENDS ///////
+
+router.get("/friends/:userId", 
+  async (req, res) => {
+    try {
+      const user = await userModel.findById(req.params.userId);
+        //NOTE we use Promise.all to Map over friends array
+      const friends = await Promise.all( 
+        user.friends.map((friendId) => {
+          return userModel.findById(friendId)
+        })
+      );
+      //NOTE we get full User obj. we extract only the properties.
+      // let friendList = [];
+      // friends.map((friend) => {
+      //   const { _id, userName, coverPicture } = friend;
+      //   friendList.push({_id, userName, coverPicture});
+      // });
+      res.status(200).json(friends)
+    } catch (err) { 
+      res.status(500).json(err)
+    }
+  })
+
+
 
 
 export default router
