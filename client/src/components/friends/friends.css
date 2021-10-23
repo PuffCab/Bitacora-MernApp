@@ -13,6 +13,7 @@
 .friendsFollowing {
     display: flex;
     flex-direction: column;
+    align-items: center;
     margin-bottom: 20px;
     cursor: pointer;
 }
@@ -22,4 +23,18 @@
     height: 100px;
     object-fit: cover;
     border-radius: 5px;
+}
+
+.friendsFollowButton {
+    margin-top: 30px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+.friendsFollowButton:focus {
+    outline: none;
 }

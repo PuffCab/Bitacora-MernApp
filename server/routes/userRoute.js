@@ -150,12 +150,12 @@ router.get("/friends/:userId",
         })
       );
       //NOTE we get full User obj. we extract only the properties.
-      // let friendList = [];
-      // friends.map((friend) => {
-      //   const { _id, userName, coverPicture } = friend;
-      //   friendList.push({_id, userName, coverPicture});
-      // });
-      res.status(200).json(friends)
+      let friendList = [];
+      friends.map((friend) => {
+        const { _id, userName, coverPicture } = friend;
+        friendList.push({_id, userName, coverPicture});
+      });
+      res.status(200).json(friendList)
     } catch (err) { 
       res.status(500).json(err)
     }

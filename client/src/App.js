@@ -10,62 +10,73 @@ import {
   Route,
   Redirect
 } from "react-router-dom";
-import { AuthContext } from './context/AuthContext';
+// import { AuthContext, AuthContextProvider } from './context/AuthContext'; //TEST original
+import { AuthContext, AuthContextProvider } from './context/AuthContext2'; //TEST nuevo
 import { useContext } from 'react';
 
 
 
-// function App() {
-
-//   const {user} = useContext(AuthContext)
-//   console.log(`userINApp`, user)
-  
-//   return (
-//     <div className="app" >
-//       <AuthContextProvider>
-//         <Router>
-//           <Switch>
-//             <Route exact path="/">
-//                 { user ? <Home/> : <Login/> }
-//             </Route>
-//             <Route exact path="/login">
-//                 { user ? <Redirect to="/"/> : <Login/>}
-//             </Route>
-//             <Route exact path="/register">
-//                 {/* { user ? <Redirect to="/"/> : <Register/>} */}
-//             </Route>
-//             <Route exact path="/profilepage/:username">
-//                 <ProfilePage/>
-//             </Route>
-//           </Switch>
-//         </Router>
-//       </AuthContextProvider>
-//     </div>
-//   );
-// }
-
-// export default App;
 function App() {
-  const { user } = useContext(AuthContext);
-  return (
-    
 
-    <Router>
-      <Switch>
-        <Route exact path="/">
-          {user ? <Home /> : <Register />}
-        </Route>
-        <Route path="/login">{user ? <Redirect to="/" /> : <Login />}</Route>
-        <Route path="/register">
-          {user ? <Redirect to="/" /> : <Register />}
-        </Route>
-        <Route path="/profile/:username">
-          <ProfilePage />
-        </Route>
-      </Switch>
-    </Router>
-    
+  const {loggedUser} = useContext(AuthContext)
+  console.log(`userINApp`,loggedUser )
+  
+  return (
+    <div className="app" >
+      
+        
+          <Switch>
+            <Route exact path="/">
+              {/* <Home/> */}
+              
+                { loggedUser ? <div>hola</div> : <Login/> }
+            </Route>
+            <Route exact path="/login">
+              <Login/>
+                {/* { loggedUser ? <Redirect to="/"/> : <Login/>} */}
+            </Route>
+            <Route exact path="/register">
+                <Register/>
+                {/* { user ? <Redirect to="/"/> : <Register/>} */}
+            </Route>
+            <Route exact path="/profilepage/:username">
+                <ProfilePage/>
+            </Route>
+          </Switch>
+        
+    </div>
   );
 }
 
-export default App;
+export default App; //TEST nuevo
+
+
+// function App() {
+//   // const { user } = useContext(AuthContext);
+//   return (
+    
+
+//     <Router>
+//       <Switch>
+//         <Route exact path="/">
+//           <Home/>
+//           {/* {user ? <Home /> : <Register />} */}
+//         </Route>
+//         <Route path="/login">
+//         <Login/>
+//         {/* {user ? <Redirect to="/" /> : <Login />} */}
+//         </Route>
+//         <Route path="/register">
+//         <Register/>
+//           {/* {user ? <Redirect to="/" /> : <Register />} */}
+//         </Route>
+//         <Route path="/profile/:username">
+//           <ProfilePage />
+//         </Route>
+//       </Switch>
+//     </Router>
+    
+//   );
+// }
+
+// export default App; //TEST original

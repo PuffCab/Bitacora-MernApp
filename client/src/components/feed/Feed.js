@@ -50,7 +50,8 @@ import { AuthContext } from '../../context/AuthContext';
     return (
         <div className="feed">
             <div className="feedContainer">
-                 <Share/>
+                {(!userName || userName === user.userName) && <Share/> }
+
                  {posts.map((p) => (
                     <Post post={p} key={p._id}/>
                  ))} 

@@ -1,8 +1,8 @@
 import React, { useContext, useRef } from 'react';
 import "./login.css"
 import { loginCall } from "../../tools/loginCall.js"
-import { AuthContext } from '../../context/AuthContext';
-
+// import { AuthContext } from '../../context/AuthContext'; //TEST original
+import { AuthContext } from '../../context/AuthContext2.js' //TEST nuevo
 // import CircularProgress from '@mui/material/CircularProgress'; //REVIEW why gives error? cannto use it login button
 
 
@@ -10,16 +10,18 @@ function Login() {
 
     const email = useRef()
     const password = useRef()
-    const { user, isFetching, error, dispatch } = useContext(AuthContext)
-
+    // const { user, isFetching, error, dispatch } = useContext(AuthContext) //TEST original
+    const { loggedUser, loginUser} = useContext(AuthContext) //TEST nuevo
     const handleOnSubmit = (e) => {
         e.preventDefault()
-        loginCall({ email: email.current.value ,password: password.current.value }, 
-              dispatch )
+        // loginCall({ email: email.current.value ,password: password.current.value }, 
+        //       dispatch ) //TEST original
+        loginUser({ email: email.current.value ,password: password.current.value })
         console.log(email.current.value)
     };
 
-    console.log(`USER`, user)
+    // console.log(`USER`, loggedUser)
+    
     return ( 
         <div className="login">
             <div className="loginWrapper">
@@ -45,11 +47,11 @@ function Login() {
                             ref={password}
                         />
                         <button className="loginButton" type="submit">
-                            {isFetching ? "loading!" : "login"} 
+                            {/* {loginUser ? "loading!" : "login"}  */}
                          </button>
                         <span className="loginRemberPassword">Forgot Password</span>
                         <button className="loginRegisterButton">
-                            {isFetching ? "loading!" : "Register "} 
+                            {/* {loginUser ? "loading!" : "Register "}  */}
                         </button>
                     </form>
                 </div>

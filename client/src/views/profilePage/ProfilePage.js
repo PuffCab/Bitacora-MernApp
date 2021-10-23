@@ -4,6 +4,7 @@ import Navbar from "../../components/navbar/Navbar";
 import Feed from "../../components/feed/Feed";
 import ProfileInfo from "../../components/profilePage/ProfileInfo";
 import authAxios from "../../tools/axios";
+import axios from "axios";
 import { useParams } from "react-router-dom"
 import Friends from "../../components/friends/Friends";
 
