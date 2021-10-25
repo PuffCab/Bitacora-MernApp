@@ -1,29 +1,34 @@
 import React, { useContext, useEffect, useState } from 'react';
 import "./friends.css"
-import axios from 'axios';
+
 import { Link } from 'react-router-dom';
 
-import { AuthContext } from "../../context/AuthContext.js";
+// import { AuthContext } from "../../context/AuthContext.js"; //TEST original
+import { AuthContext } from "../../context/AuthContext2.js";
 import { Add, Remove } from '@mui/icons-material';
+// import axios from 'axios';
+import axios2 from '../../tools/axios2';
 
 function Friends({ user }) {
     const testImgFolder = process.env.REACT_APP_PUBLIC_FOLDER
+
+    console.log(`USER en FRIENDS>>>>`,user)
     
 
     const [friends, setFriends] = useState([])
-    const {user:currentUser} = useContext(AuthContext)
+    const {loggedUser:currentUser, userUpdated, UpdateUser} = useContext(AuthContext)
     const [isFriend, setIsFriend] = useState(false)
 
     useEffect ( () => {
-        setIsFriend(currentUser.friends.includes(user?.id))
-    }, [currentUser, user.id]) 
+        setIsFriend(currentUser.friends.includes(user?._id))
+    }, [currentUser, user._id]) 
 
 
     useEffect(() => {
         //NOTE we can't use async with useEffect-> I create a new function inside
         const getFriends = async () =>{
             try {
-                const friendList = await axios.get("/users/friends/"+user._id)
+                const friendList = await axios2.get("/users/friends/"+user._id)
                 setFriends(friendList.data)
                 console.log(`friendList>>>>`, friendList)
             } catch (err) {
@@ -36,9 +41,13 @@ function Friends({ user }) {
     const handleClick = async () => {
         try {
             if(isFriend) {
-                await axios.put("/users/"+user._id+"/unfollow", {userId: currentUser._id})
+                await axios2.put("/users/"+user._id+"/unfollow", {userId: currentUser._id})
+                UpdateUser(currentUser._id)
+                console.log("UNFOLLED user with ID", user._id)
             } else {
-                await axios.put("/users/"+user._id+"/follow", {userId: currentUser._id})
+                await axios2.put("/users/"+user._id+"/follow", {userId: currentUser._id})
+                UpdateUser(currentUser._id)
+                console.log("FOLLOW user with ID", user._id)
             }
         } catch (err) {
             console.log(err)
@@ -50,7 +59,7 @@ function Friends({ user }) {
             <h4 className="friendsTitle">User Friends</h4>
             <div className="friendsFollowings">
             
-            {user.userName !== currentUser.userName && (
+            {user.userName === currentUser.userName && (
                 <button 
                     className="friendsFollowButton" 
                     onClick={handleClick} >
@@ -75,7 +84,7 @@ function Friends({ user }) {
                 </Link>
             ))}
 
-            </div>
+            </div> 
         </>
     );
 }

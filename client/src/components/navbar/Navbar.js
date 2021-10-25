@@ -2,14 +2,15 @@ import React, { useContext } from 'react';
 import "./navbar.css"
 import { Chat, Person, Search, Notifications } from "@mui/icons-material"
 import { Link } from 'react-router-dom';
-import { AuthContext } from '../../context/AuthContext';
-
+// import { AuthContext } from '../../context/AuthContext'; //TEST original
+import { AuthContext } from '../../context/AuthContext2';//TEST nuevo
 
 const Navbar = () => {
     const testImgFolder = process.env.REACT_APP_PUBLIC_FOLDER
 
-    const { user } = useContext(AuthContext)
-    console.log(`userName>>>`, user.userName)
+    // const { user } = useContext(AuthContext) //TEST original
+    const { loggedUser } = useContext(AuthContext)
+    console.log(`NAVBAR userName>>>`, loggedUser.userName)
 
     return (
         <div className="navbarContainer">
@@ -48,8 +49,8 @@ const Navbar = () => {
                         <span className="navbarIconCount">0</span>
                     </div>
                 </div> 
-                <Link to={`/profile/${user.userName}`}>
-                    <img src={user.coverPicture ? testImgFolder+user.coverPicture : testImgFolder + "/user/avatar.jpeg" } alt="" className="navabarProfilePicture" />
+                <Link to={`/profilepage/${loggedUser.userName}`}>
+                    <img src={loggedUser.coverPicture ? testImgFolder+loggedUser.coverPicture : testImgFolder + "/user/avatar.jpeg" } alt="" className="navabarProfilePicture" />
                 </Link>
             </div>
         </div>

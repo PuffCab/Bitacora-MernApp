@@ -4,24 +4,27 @@ import { useState, useEffect } from 'react';
 import Post from '../post/Post';
 import Share from '../share/Share';
 import './feed.css';
-import authAxios from "../../tools/axios.js";
-import axios from "axios"
-import { AuthContext } from '../../context/AuthContext';
+// import authAxios from "../../tools/axios.js";
+// import axios from "axios"//TEST original
+import axios2 from "../../tools/axios2"
+// import { AuthContext } from '../../context/AuthContext'; //TEST original
+import { AuthContext } from '../../context/AuthContext2'; //TEST nuevo
 
 
  function Feed({userName}) {
-
+     console.log("userName en FEED", userName)
     const [posts, setPosts] = useState([])
-    const { user } = useContext(AuthContext)
-    console.log(`user._id>>>`, user._id.$oid) //ASK por culpa del json.stringify se genera el _Id:$oid:213828
+    // const { user } = useContext(AuthContext) //TEST original
+    const { loggedUser } = useContext(AuthContext) //TEST nuevo
+    // console.log(`user._id>>>`, loggedUser) //ASK por culpa del json.stringify se genera el _Id:$oid:213828
 
     useEffect(() => {
         const fetchPosts = async () => {
-            console.log(`user._id>>>`, user._id)
-            const res = userName 
+            // console.log(`FEED user._id>>>`, loggedUser)
+            const res =   
             
-                ? await axios.get("posts/profilepage/" + userName ) //WITH TOKEN hardcoded
-                : await axios.get("posts/allUsersPosts/" + user._id.$oid); //WITHOUT TOKEN
+            // userName  ? await axios2.get("posts/profilepage/" + userName ) : //WITH TOKEN hardcoded
+            await axios2.get("posts/allUsersPosts/" + loggedUser._id);
             
             const orderedPosts = res.data.sort((a,b) => {
                 return new Date(b.createdAt) - new Date(a.createdAt);
@@ -32,7 +35,7 @@ import { AuthContext } from '../../context/AuthContext';
         
         fetchPosts()
         
-    }, [userName, user._id])
+    }, [userName, loggedUser])
     // useEffect(() => {
         
     //     const getCities = async () => {
@@ -50,8 +53,9 @@ import { AuthContext } from '../../context/AuthContext';
     return (
         <div className="feed">
             <div className="feedContainer">
-                {(!userName || userName === user.userName) && <Share/> }
-
+                {loggedUser.userName ? loggedUser.userName : "NOBODY" }
+                {console.log(userName)}  
+                { userName ? <Share/> : <div></div> }
                  {posts.map((p) => (
                     <Post post={p} key={p._id}/>
                  ))} 
@@ -64,3 +68,4 @@ import { AuthContext } from '../../context/AuthContext';
 
 export default Feed
  
+

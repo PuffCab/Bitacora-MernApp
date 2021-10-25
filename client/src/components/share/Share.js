@@ -1,20 +1,23 @@
-import { AutoFixOffSharp, PermMedia } from '@mui/icons-material';
+import {  Cancel, PermMedia } from '@mui/icons-material';
 import React, { useRef, useState } from 'react';
 import "./share.css";
 import { useContext } from  "react";
-import { AuthContext } from "../../context/AuthContext.js";
-import axios from "axios";
+// import { AuthContext } from "../../context/AuthContext.js"; //TEST original
+import { AuthContext } from "../../context/AuthContext2.js"; //TEST nuevo
+// import axios from "axios"; //TEST original
+import axios2 from '../../tools/axios2';//TEST nuevo
 
 function Share() {
 
     const testImgFolder = process.env.REACT_APP_PUBLIC_FOLDER
     
-    const { user } = useContext(AuthContext)
-    console.log(`user`, user)
+    // const { user } = useContext(AuthContext) //TEST original
+    const { loggedUser } = useContext(AuthContext)//TEST nuevo
+    // console.log(`user in SHARE`, loggedUser)
     
     
     /////////////////////
-    //Create and submit post
+    //Create submit post and Upload picture
     /////////////////////
     const postText = useRef()
     const [file, setFile] = useState(null)
@@ -22,7 +25,8 @@ function Share() {
     const submitHandler = async (e) => {
         e.preventDefault();
         const newPost = {
-            userId: user._id.$oid, //REVIEW the user._id.$oid
+            //TEST userId: loggedUser._id.$oid, //REVIEW the user._id.$oid // original
+            userId: loggedUser._id,//TEST nuevo
             description: postText.current.value
         }
         if(file){
@@ -32,13 +36,13 @@ function Share() {
             data.append("file", file)
             newPost.img = fileName;
             try{
-                await axios.post("/upload", data);
+                await axios2.post("/upload", data);
             } catch(err) {
                 console.log(`ERROR uploading file`, err.message)
             }
         }
         try {
-            await axios.post("/posts", newPost)
+            await axios2.post("/posts", newPost)
             window.location.reload() // REVIEW cheap trick to refresh after uploading. Later create a post context and update post state
             console.log(`newPost`, newPost)
         } catch(err){
@@ -49,8 +53,8 @@ function Share() {
         <div className="shareComponent">
             <div className="shareContainer">
                 <div className="topSharePart">
-                    <img className="shareProfilePic" src={user.coverPicture ? user.coverPicture : testImgFolder + "/user/avatar.jpeg"} alt="profilepic" />
-                    {console.log("COVER PICTURE!!!", user.coverPicture)}
+                    <img className="shareProfilePic" src={loggedUser.coverPicture ?  testImgFolder+loggedUser.coverPicture : testImgFolder + "/user/avatar.jpeg"} alt="profilepic" />
+                    {console.log("COVER PICTURE!!!", loggedUser.coverPicture)}
                     <input 
                         className="ShareInput" 
                         placeholder="your experience" 
@@ -58,6 +62,13 @@ function Share() {
                     />
                 </div>
                 <hr />
+                {file && (
+                    <div className="shareImgContainer">
+                        {/* NOTE we create a pseudo URL to preview the uploaded file */}
+                        <img className="shareImg" src={URL.createObjectURL(file)} alt="post img" />  
+                        <Cancel className="shareCancelImg" onClick={()=>setFile(null)} />
+                    </div>
+                )}
                 <form className="bottomSharePart" onSubmit={submitHandler}>
                     <div className="shareOptions">
                         <label className="shareOption" htmlFor="file">
@@ -76,8 +87,7 @@ function Share() {
                     <button className="shareButton" type="submit">Share</button>
                 </form>
 
-            </div>
-            share component 
+            </div> 
         </div> 
     )
 }

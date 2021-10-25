@@ -118,8 +118,8 @@ router.get("/profilepage/:userName",
     })
 
     
-//* Get all posts from ALL Users ////////// 
-router.get("/allUsersPosts/:userId",
+//* Get all posts from one USER & FRIENDS ////////// 
+router.get("/userAndFriendsPosts/:userId",
     // authenticate,
     // passport.authenticate("jwt", { session: false }), REVIEW que hago con Token....es para cuando no estoy logged in?
     async (req, res) => {
@@ -139,6 +139,20 @@ router.get("/allUsersPosts/:userId",
             res.status(500).json(err.message);
         }
     })
+//* Get all posts from ALL USER ////////// 
+router.get("/allUsersPosts/:userId",
+    // authenticate,
+    // passport.authenticate("jwt", { session: false }), //REVIEW que hago con Token....es para cuando no estoy logged in?
+    async (req, res) => {
+        try {
+            
+            const allUsersPosts = await postModel.find();
+            
+            res.status(200).json(allUsersPosts);
+        } catch(err) {
+            res.status(500).json(err.message);
+        }
+    })    
 
 //* Like/Dislike Post //////////
 router.put("/:id/like", 

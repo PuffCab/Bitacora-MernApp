@@ -16,6 +16,7 @@ router.get('/all',
 router.put('/:id',
     async (req, res) => {
       if(req.body.userId === req.params.id || req.body.isAdmin) {
+        console.log(`req.body`, req.params)
           if(req.body.password){ //if user tries to update password, regenerate password hash
             try {
                   const salt = await bcrypt.genSalt(10);
@@ -28,8 +29,9 @@ router.put('/:id',
             const user = await userModel.findByIdAndUpdate(req.params.id, { // or (req.body.userId)
               $set: req.body, //is gonna automatically set all inputs inside this body
             });
-            res.status(200).json('User Account has been updated')
+            res.status(200).json(user)
             console.log(`account updated`)
+            
           } catch(err) {
               return res.status(500).json(err)   
           }
@@ -58,17 +60,13 @@ router.delete('/:id',
       } 
     })
 
-//* /////////  GET A USER ///////
-
-router.get("/", 
+//* /////////  GET A USER with ID ///////
+router.get("/profile/:id", 
     async (req, res) => {
-      const userId = req.query.userId;
-      const userName = req.query.userName;
+    
       try {
-        const user = userId
-          ? await userModel.findById(userId)
-          : await userModel.findOne({ userName: userName}); // REVIEW we introduce condition in case we dont have ID and just userNanme
-        const {nickName, favCity, ...rest} = user._doc // use of spread op. to take out properties we dont want to get
+        const user = await userModel.findById(req.params.id) 
+        const {nickName, favCity, ...rest} = user._doc
 
         res.status(200).json(rest);
         console.log(`your user is here`)
@@ -78,6 +76,29 @@ router.get("/",
         res.status(500).json(err)
       }
     })
+
+//     //* /////////  GET A USER ///////
+
+router.get("/", 
+    async (req, res) => {
+      const userId = req.query.userId;
+      const userName = req.query.userName;
+      
+      try {
+        const user = userId
+          ? await userModel.findById(userId)
+          : await userModel.findOne({ userName: userName}); // REVIEW condition in case we dont have ID and just userNanme (be aware: url /users?userName=abc or /users?userId=1234)
+        const {nickName, favCity, ...rest} = user._doc // use of spread op. to take out properties we dont want to get
+
+        res.status(200).json(rest);
+        console.log(`your user is here`)
+
+      } catch(err){
+        console.log("that went wrong")
+        res.status(500).json(err)
+      }
+    }) 
+
 
 //* ///////// FOLOW USER ///////
 router.put("/:id/follow", 
@@ -157,7 +178,7 @@ router.get("/friends/:userId",
       });
       res.status(200).json(friendList)
     } catch (err) { 
-      res.status(500).json(err)
+      res.status(500).json(err.message)
     }
   })
 

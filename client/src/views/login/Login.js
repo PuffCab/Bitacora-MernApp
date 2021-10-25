@@ -1,6 +1,6 @@
 import React, { useContext, useRef } from 'react';
 import "./login.css"
-import { loginCall } from "../../tools/loginCall.js"
+// import { loginCall } from "../../tools/loginCall.js"
 // import { AuthContext } from '../../context/AuthContext'; //TEST original
 import { AuthContext } from '../../context/AuthContext2.js' //TEST nuevo
 // import CircularProgress from '@mui/material/CircularProgress'; //REVIEW why gives error? cannto use it login button
@@ -47,11 +47,11 @@ function Login() {
                             ref={password}
                         />
                         <button className="loginButton" type="submit">
-                            {/* {loginUser ? "loading!" : "login"}  */}
+                            {loggedUser ? "loading!" : "login"} 
                          </button>
                         <span className="loginRemberPassword">Forgot Password</span>
                         <button className="loginRegisterButton">
-                            {/* {loginUser ? "loading!" : "Register "}  */}
+                            {loggedUser ? "loading!" : "Register "} 
                         </button>
                     </form>
                 </div>

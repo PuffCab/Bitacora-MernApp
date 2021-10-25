@@ -5,41 +5,39 @@ import Login from './views/login/Login';
 import ProfilePage from './views/profilePage/ProfilePage';
 import Register from './views/register/Register';
 import {
-  BrowserRouter as Router,
   Switch,
   Route,
   Redirect
 } from "react-router-dom";
 // import { AuthContext, AuthContextProvider } from './context/AuthContext'; //TEST original
-import { AuthContext, AuthContextProvider } from './context/AuthContext2'; //TEST nuevo
+import { AuthContext } from './context/AuthContext2'; //TEST nuevo
 import { useContext } from 'react';
 
 
 
 function App() {
 
-  const {loggedUser} = useContext(AuthContext)
-  console.log(`userINApp`,loggedUser )
+  const { loggedUser } = useContext(AuthContext)
+  // console.log(`userINApp`,loggedUser )
   
   return (
     <div className="app" >
       
         
           <Switch>
-            <Route exact path="/">
-              {/* <Home/> */}
-              
-                { loggedUser ? <div>hola</div> : <Login/> }
+            <Route exact path="/"> 
+                             
+                { !loggedUser ? <Register/> : <Home/>  }
             </Route>
             <Route exact path="/login">
               <Login/>
-                {/* { loggedUser ? <Redirect to="/"/> : <Login/>} */}
+                { loggedUser ? <Redirect to="/"/> : <Login/>}
             </Route>
             <Route exact path="/register">
                 <Register/>
-                {/* { user ? <Redirect to="/"/> : <Register/>} */}
+                { loggedUser ? <Redirect to="/"/> : <Register/>}
             </Route>
-            <Route exact path="/profilepage/:username">
+            <Route exact path="/profilepage/:userId">
                 <ProfilePage/>
             </Route>
           </Switch>

@@ -5,13 +5,17 @@ import "./post.css";
 //    
 import { useState, useEffect, useContext } from "react";
 import authAxios from '../../tools/axios';
-import axios from "axios";
+// import axios from "axios"//TEST original
+import axios2 from '../../tools/axios2';
 import TimeAgo from "react-timeago"
 import { Link } from 'react-router-dom';
-import { AuthContext } from '../../context/AuthContext';
+// import { AuthContext } from '../../context/AuthContext'; //TEST original
+import { AuthContext } from '../../context/AuthContext2';//TEST nuevo
+
 
 
 function Post({ post }) {
+    // console.log("posts en POST", post)
 
     // const user = users.filter(u => u.id === 1)
     // console.log(user[0].userName)
@@ -20,14 +24,17 @@ function Post({ post }) {
     const [isLiked, setIsLiked] = useState(false)
     const [user, setUser] = useState({})
     const testImgFolder = process.env.REACT_APP_PUBLIC_FOLDER
-    const { user:currentUser } = useContext(AuthContext)
+    // const { user:currentUser } = useContext(AuthContext) //TEST original
+    const { loggedUser:currentUser } = useContext(AuthContext)
+
+    // console.log(`loggedUser in POST`, currentUser)
     
     //////////////////////
     //Handle Likes
     ////////////////////// 
     const likeHandler = () => {
         try {
-            axios.put("/posts/"+ post._id +"/like", {userId: currentUser._id.$oid})
+            axios2.put("/posts/"+ post._id +"/like", {userId: currentUser._id})
         } catch(err) {
 
         }
@@ -36,8 +43,8 @@ function Post({ post }) {
     }
     //check if  currentuser has liked the post before
     useEffect(() => {
-        setIsLiked(post.likes.includes(currentUser._id.$oid))
-    }, [post.likes, currentUser._id])
+        setIsLiked(post.likes.includes(currentUser._id))
+    }, [post.likes, currentUser])
      //////////////////////
     //FIN Handle Likes
     //////////////////////
@@ -45,7 +52,7 @@ function Post({ post }) {
 
     useEffect(() => {
         const fetchUser = async () => {
-            const res = await axios.get(`/users?userId=${post.userId}`)
+            const res = await axios2.get(`/users?userId=${post.userId}`)
             setUser(res.data)
             // console.log(res.data)
         }
@@ -59,7 +66,8 @@ function Post({ post }) {
             <div className="postContainer">
                 <div className="postTop">
                     <div className="postTopLeft">
-                        <Link to={`profile/${user.userName}`}>
+                        <Link to={`profilepage/${post.userId}`}>
+                        {/* FIXME porque cuando clicko en users sin uploaded foto, anhade el path /profilepage/profilepage/id" */}
                           <img className="postUserProfileImage"  src={user.coverPicture ? testImgFolder+user.coverPicture : testImgFolder + "/user/avatar.jpeg" } alt="Salamanca" />  
                           
                         </Link>
