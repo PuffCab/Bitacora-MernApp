@@ -54,7 +54,7 @@ function Share() {
             <div className="shareContainer">
                 <div className="topSharePart">
                     <img className="shareProfilePic" src={loggedUser.coverPicture ?  testImgFolder+loggedUser.coverPicture : testImgFolder + "/user/avatar.jpeg"} alt="profilepic" />
-                    {console.log("COVER PICTURE!!!", loggedUser.coverPicture)}
+                    
                     <input 
                         className="ShareInput" 
                         placeholder="your experience" 

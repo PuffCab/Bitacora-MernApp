@@ -1,87 +1,88 @@
 .navbarContainer {
-     height: 50px;
-     width: 100%;
-     background-color: #913009d2 ;
-     display: flex;
-     align-items: center;
-     position: sticky;
-     top: 0;
-} 
+  height: 50px;
+  width: 100%;
+  background-color: #092b74d2;
+  display: flex;
+  align-items: center;
+  position: sticky;
+  top: 0;
+}
 .logo {
-    font-size: 24px;
-    margin-left: 5px;
-    font-weight: bold;
-    color: white;
-    cursor: pointer;
+  font-size: 24px;
+  margin-left: 1px;
+  margin-right: 1px;
+  font-weight: bold;
+  color: white;
+  cursor: pointer;
 }
 .navbarLeft {
-    flex: 3;
+  flex: 3;
 }
 .navbarCenter {
-    flex: 5;
+  flex: 5;
 }
 .searchBar {
-    width: 100%;
-    height: 30px;
-    background-color: white;
-    border-radius: 30px;
-    display: flex;
-    align-items: center;
-
+  width: 100%;
+  height: 30px;
+  background-color: white;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
 }
 .searchIcon {
-    font-size: 20px !important;
-    margin-left: 10px;
+  font-size: 20px !important;
+  margin-left: 10px;
 }
 .searchInput {
-    border: none;
-    width: 70%;
+  border: none;
+  width: 60%;
 }
 .searchInput:focus {
-    outline: none;
+  outline: none;
 }
 
 .navbarRight {
-    flex: 4;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
+  flex: 4;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 }
 .navbarLink {
-    margin-right: 10px;
-    font-style: 14px;
-    cursor: pointer;  
+  margin-right: 10px;
+  font-style: 14px;
+  cursor: pointer;
+  text-decoration: none;
 }
 
 .navbarIcons {
-    display: flex;
+  display: flex;
 }
 .navabarIconElement {
-    margin-right: 15px;
-    cursor: pointer;
-    position: relative;
+  margin-right: 15px;
+  cursor: pointer;
+  position: relative;
 }
 
 .navbarIconCount {
-    width: 15px;
-    height: 15px;
-    background-color: black;
-    border-radius: 50%;
-    color: white;
-    /* position: absolute; */
-    /* top: -5px;
+  width: 15px;
+  height: 15px;
+  background-color: black;
+  border-radius: 50%;
+  color: white;
+  /* position: absolute; */
+  /* top: -5px;
     right: -5px; */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 12px;
-
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
 }
 
 .navabarProfilePicture {
-    width: 32px;
-    height: 32px;
-    background-repeat: 50px;
-    object-fit: cover;
-    cursor: pointer;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  cursor: pointer;
+  margin-right: 2px;
 }

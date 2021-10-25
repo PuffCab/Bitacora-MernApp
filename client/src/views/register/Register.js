@@ -54,7 +54,7 @@ function Register() {
                             minLength="6"                               
                             />
                         <button className="loginButton" type="submit">Sign up</button>
-                        <button className="loginRegisterButton" type="submit" onClick={(() => history.push('/login'))}>Login into your Account</button>
+                        <button className="loginRegisterButton" type="submit" onClick={(() => history.push('/login'))}>Login</button>
                     </form>
                 </div>
             </div>

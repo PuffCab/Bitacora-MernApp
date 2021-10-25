@@ -17,7 +17,7 @@ function Login() {
         // loginCall({ email: email.current.value ,password: password.current.value }, 
         //       dispatch ) //TEST original
         loginUser({ email: email.current.value ,password: password.current.value })
-        console.log(email.current.value)
+        // console.log(email.current.value)
     };
 
     // console.log(`USER`, loggedUser)
@@ -27,7 +27,7 @@ function Login() {
             <div className="loginWrapper">
                 <div className="loginLeft">
                     <h3 className="loginLogo">Bitacora</h3>
-                    <span className="loginText">Login to see some nice places</span>
+                    <span className="loginText">Login if you have an account</span>
                 </div>
                 <div className="loginRight">
                     <form className="loginArea" onSubmit={handleOnSubmit}>

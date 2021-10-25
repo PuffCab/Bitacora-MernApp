@@ -5,12 +5,35 @@ import { Link } from 'react-router-dom';
 // import { AuthContext } from '../../context/AuthContext'; //TEST original
 import { AuthContext } from '../../context/AuthContext2';//TEST nuevo
 
+import Button from '@mui/material/Button';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+
+
+
 const Navbar = () => {
+    
     const testImgFolder = process.env.REACT_APP_PUBLIC_FOLDER
 
     // const { user } = useContext(AuthContext) //TEST original
-    const { loggedUser } = useContext(AuthContext)
-    console.log(`NAVBAR userName>>>`, loggedUser.userName)
+    const { loggedUser, logout } = useContext(AuthContext)
+    // console.log(`NAVBAR userName>>>`, loggedUser.userName)
+
+
+    //////////
+    //MUI menu constants
+    //////////
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const open = Boolean(anchorEl);
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
+    ////////// \\\\\\\\
+
+
 
     return (
         <div className="navbarContainer">
@@ -26,11 +49,40 @@ const Navbar = () => {
                     <Search className="searchIcon"/>
                     <input placeholder="Search...."type="text" className="searchInput" />
                 </div>
-            <div className="navbarRight">
-                <div className="navbarLinks"> 
-                    <span className="navbarLink">home</span>
-                    <span className="navbarLink">Feed</span>
-                </div>
+                <div className="navbarRight">
+                    <Button
+                        id="demo-positioned-button"
+                        aria-controls="demo-positioned-menu"
+                        aria-haspopup="true"
+                        aria-expanded={open ? 'true' : undefined}
+                        onClick={handleClick}
+                        style={{color:"white"}}
+                    >
+                        Menu
+                    </Button>
+                <Menu
+                    id="simple-menu"
+                    anchorEl={anchorEl}
+                    keepMounted
+                    open={Boolean(anchorEl)}
+                    onClose={handleClose}
+                >
+                    <MenuItem onClick={handleClose}>
+                        <Link to='/' className="navbarLink" >Home</Link>
+                    </MenuItem>
+
+                    <MenuItem onClick={handleClose}>
+                    <Link to='/register' className="navbarLink">register</Link>
+                    </MenuItem>
+
+                    <MenuItem onClick={handleClose}>
+                    <Link to='/login' className="navbarLink">login</Link>
+                    </MenuItem>
+
+                    <MenuItem onClick={() => {handleClose();logout()}}>
+                    <Link to='/login' className="navbarLink">logOUT</Link>
+                    </MenuItem>
+                </Menu>
                 <div className="navbarIcons">
                     <div className="navabarIconElement">
                         <Person/>
@@ -49,7 +101,7 @@ const Navbar = () => {
                         <span className="navbarIconCount">0</span>
                     </div>
                 </div> 
-                <Link to={`/profilepage/${loggedUser.userName}`}>
+                <Link to={`/profilepage/${loggedUser._id}`}>
                     <img src={loggedUser.coverPicture ? testImgFolder+loggedUser.coverPicture : testImgFolder + "/user/avatar.jpeg" } alt="" className="navabarProfilePicture" />
                 </Link>
             </div>

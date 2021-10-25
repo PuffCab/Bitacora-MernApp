@@ -71,7 +71,7 @@ function Friends({ user }) {
                 {/* REVIEW esto no tiene sentido aqui, sino en una vista con todos los post de todos los users...y que en el profile se vean solo los post de amigos...o algo asi */}
             
             {friends.map((friend) => (
-                <Link to={"/profile/"+friend.userName} style={{textDecoration:"none"}}>  
+                <Link to={"/profilepage/"+friend._id} style={{textDecoration:"none"}}>  
                 {/* REVIEW no se si tiene sentido mandarlo al profile de un user, si es ruta protegida. quiza mandarlo a sus posts */}
                     <div className="friendsFollowing">
                         <img 
