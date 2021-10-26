@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import "./profilePage.css";
 import Navbar from "../../components/navbar/Navbar";
 import Feed from "../../components/feed/Feed";
-import ProfileInfo from "../../components/profilePage/ProfileInfo";
+import ProfileInfo from "../../components/profileInfo/ProfileInfo";
 // import authAxios from "../../tools/axios";//TEST original
 // import axios from "axios";
 import { useParams } from "react-router-dom";
@@ -89,10 +89,10 @@ function ProfilePage() {
                 }
                 alt=""
               />
-              <form className="profilePictureWrapper" onSubmit={submitHandler}>
-                <div className="shareOptions">
-                  <label className="shareOption" htmlFor="file">
-                    <AddAPhoto className="shareIcon" />
+              <form className="profileIconsContainer" onSubmit={submitHandler}>
+                <div className="profileButtons">
+                  <label className="profileOption" htmlFor="file">
+                    <AddAPhoto className="profileIcon" />
                     <input
                       type="file"
                       id="file"
@@ -103,8 +103,8 @@ function ProfilePage() {
                     {/* we do fil[0] to allow only 1 file upload */}
                   </label>
                 </div>
-                <button className="shareButton" type="submit">
-                  Share
+                <button className="profileSendButton" type="submit">
+                  edit
                 </button>
               </form>
             </div>
